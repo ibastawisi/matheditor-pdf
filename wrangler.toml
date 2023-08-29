@@ -1,0 +1,8 @@
+name = "matheditor-pdf"
+main = "src/index.ts"
+compatibility_date = "2023-08-28"
+compatibility_flags = [ "nodejs_compat" ]
+usage_model = "bundled"
+workers_dev = true
+
+browser = { binding = "MYBROWSER", type = "browser" }
