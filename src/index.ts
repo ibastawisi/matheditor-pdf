@@ -22,13 +22,14 @@ export default {
         left: "0.4in",
       },
     })
+    const title = await page.title()
     await browser.close()
 
     try {
       return new Response(pdf, {
         headers: {
           "Content-Type": "application/pdf",
-          "Content-Disposition": `inline; filename="${id}.pdf"`,
+          "Content-Disposition": `inline; filename="${title}.pdf"`,
         },
         status: 200
        })
