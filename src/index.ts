@@ -13,8 +13,8 @@ export default {
     const scale = search.get("scale") || "1";
     const format = (search.get("format") || "A4") as puppeteer.PaperFormat;
     const landscape = search.get("landscape") || "false";
-    const id = url.pathname.split("/")[2];
-    url.pathname = `/embed/${id}`;
+    const handle = url.pathname.split("/")[2];
+    url.pathname = `/embed/${handle}`;
     await page.goto(url.toString(), { waitUntil: "networkidle0" })
     try {
       const pdf = await page.pdf({
@@ -29,12 +29,11 @@ export default {
           left: "0.4in",
         },
       })
-      const title = await page.title()
       await browser.close()
       return new Response(pdf, {
         headers: {
           "Content-Type": "application/pdf",
-          "Content-Disposition": `inline; filename="${title}.pdf"`,
+          "Content-Disposition": `inline; filename="${handle}.pdf"`,
         },
         status: 200
       })
