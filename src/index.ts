@@ -14,8 +14,10 @@ export default {
     const format = (search.get("format") || "A4") as puppeteer.PaperFormat;
     const landscape = search.get("landscape") || "false";
     const handle = url.pathname.split("/")[2];
+    url.hostname = "matheditor.me";
     url.pathname = `/embed/${handle}`;
-    await page.goto(url.toString(), { waitUntil: "networkidle0" })
+    await page.goto(url.toString(), { waitUntil: "networkidle0" });
+    await page.waitForFunction('document.fonts.ready');
     try {
       const pdf = await page.pdf({
         scale: Number(scale),
